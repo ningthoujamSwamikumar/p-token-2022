@@ -1,0 +1,7 @@
+[package]
+name = "p-token-2022"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+pinocchio = "0.9.1"
