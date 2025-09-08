@@ -2,8 +2,10 @@ use pinocchio::program_error::{ProgramError, ToStr};
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub enum TokenError {
+    //0
     InvalidInstruction,
     InvalidArgument,
+    AlreadyInUse,
 }
 
 impl From<TokenError> for ProgramError {
@@ -18,6 +20,7 @@ impl TryFrom<u32> for TokenError {
     fn try_from(value: u32) -> Result<Self, Self::Error> {
         match value {
             0 => Ok(TokenError::InvalidInstruction),
+            1 => Ok(TokenError::AlreadyInUse.into()),
             _ => Err(TokenError::InvalidArgument.into()),
         }
     }
@@ -31,6 +34,7 @@ impl ToStr for TokenError {
         match self {
             TokenError::InvalidInstruction => "Error: Invalid instruction",
             TokenError::InvalidArgument => "Error: Invalid argument",
+            TokenError::AlreadyInUse => "Error: Account already initialized!",
         }
     }
 }
